@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public void StarGame()
     {
         GetComponent<AudioSource>().Play();
-        m_player = new PlayerController(10, 100);
+        m_player = new PlayerController(10, 2, 100);
 
         m_uiController.EnableGameUI(true);
         m_uiController.EnableStartButton(false);
@@ -48,5 +48,11 @@ public class GameManager : MonoBehaviour
         {
 
         }
+    }
+
+    public void ApplyTrap(int damage)
+    {
+        m_player.ReceiveDamage(damage);
+        m_uiController.PlayerLifeBar(m_player.GetCurrentLife(), m_player.GetMaxLife());
     }
 }
