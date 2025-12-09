@@ -12,15 +12,45 @@ public class RoomsController : MonoBehaviour
     public SpriteRenderer m_itemSprite;
     public SpriteRenderer m_trapSprite;
 
-
-    void Start()
+    public void SetRoom(EnemyData data, Sprite sprite)
     {
-        
+        m_enemyRoom.SetActive(true);
+        m_itemRoom.SetActive(false);
+        m_trapRoom.SetActive(false);
+        //
+        m_enemySprite.sprite = sprite;
+
+    }
+    
+    public void SetRoom(TrapData data, Sprite sprite)
+    {
+        m_enemyRoom.SetActive(false);
+        m_itemRoom.SetActive(false);
+        m_trapRoom.SetActive(true);
+        //
+        m_enemySprite.sprite = sprite;
+    }
+
+    public void SetRoom(ItemData data, Sprite sprite)
+    {
+        m_enemyRoom.SetActive(false);
+        m_itemRoom.SetActive(true);
+        m_trapRoom.SetActive(false);
+        //
+        m_enemySprite.sprite = sprite;
+    }
+
+    public void DisableRooms()
+    {
+        m_enemyRoom.SetActive(false);
+        m_itemRoom.SetActive(false);
+        m_trapRoom.SetActive(false);
+    }
+
+    public GameObject GetEnemyRoom()
+    {
+        return m_enemyRoom;
     }
 
 
-    void Update()
-    {
-        
-    }
 }
