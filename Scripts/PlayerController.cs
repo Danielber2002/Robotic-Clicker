@@ -6,9 +6,10 @@ public class PlayerController : MonoBehaviour
     private int m_maxLife;
     private int m_currentLife;
 
-    public PlayerController(int damage)
+    public PlayerController(int damage, int maxLife)
     {
         m_damage = damage;
+        m_maxLife = maxLife;
     }
 
     public int Attack()
@@ -23,9 +24,14 @@ public class PlayerController : MonoBehaviour
         return m_currentLife;
     }
 
+    public int GetMaxLife()
+    {
+        return m_maxLife;
+    }
+
     public bool IsDie() 
     {
-        if (m_currentLife <= 0)
+        if (m_currentLife < 0)
         {
             return true;
         }

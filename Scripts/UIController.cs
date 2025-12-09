@@ -19,4 +19,29 @@ public class UIController : MonoBehaviour
     {
         
     }
+
+    public void EnableGameUI(bool isActive)
+    {
+        m_gameUI.SetActive(isActive);
+    }
+
+    public void EnableStartButton(bool isActive)
+    {
+        m_startButton.SetActive(isActive);
+    }
+
+    public void EnableEnemyBar(bool isActive)
+    {
+        m_enemyLife.gameObject.SetActive(isActive);
+    }
+
+    public void EnemyLifeBar ( int amount, int maxLife)
+    {
+        m_enemyLife.fillAmount = amount / maxLife;
+    }
+
+    public void PlayerLifeBar(int amount, int maxLife)
+    {
+        m_playerLife.fillAmount = amount / maxLife;
+    }
 }
