@@ -5,13 +5,25 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private int m_damage;
+    private int m_defense;
     private int m_maxLife;
     private int m_currentLife;
 
-    public PlayerController(int damage, int maxLife)
+    public PlayerController(int damage,int defense, int maxLife)
     {
         m_damage = damage;
+        m_defense = defense;
         m_maxLife = maxLife;
+    }
+
+    public void ReceiveDamage(int damage)
+    {
+        int currentDamage = damage - m_defense;
+        if(currentDamage > 0)
+        {
+            m_currentLife -= damage - m_defense;
+            Debug.Log("Ay!");
+        }
     }
 
     public int Attack()
