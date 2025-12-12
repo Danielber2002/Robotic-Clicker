@@ -22,8 +22,8 @@ public class PlayerTrapInputBehaviour : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && m_counterRoomTime >= m_timeToChangeRoom)
         {
-            m_gameManager.ApplyTrap(5);
-            //m_gameManager.ChangeRoom();
+            m_gameManager.ApplyTrap(15);
+            m_gameManager.ChangeRoom();
         }
     }
 }

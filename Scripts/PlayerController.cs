@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     {
         m_damage = damage;
         m_defense = defense;
+        m_currentLife = maxLife;
         m_maxLife = maxLife;
     }
 
@@ -25,8 +26,12 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Ay!");
         }
     }
+    public void HealDamage(int heal)
+    {
+            m_currentLife += heal;
+    }
 
-    public int Attack()
+    public int Attack(EnemyData enemy)
     {
         int damageAux = m_damage;
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemData : MonoBehaviour
+public class ItemData
 {
    public string m_name;
     public int m_lifeUp;

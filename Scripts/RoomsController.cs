@@ -17,7 +17,7 @@ public class RoomsController : MonoBehaviour
         m_enemyRoom.SetActive(true);
         m_itemRoom.SetActive(false);
         m_trapRoom.SetActive(false);
-        //
+        m_enemyRoom.GetComponent<EnemyBehaviour>().SetEnemy(data);
         m_enemySprite.sprite = sprite;
 
     }

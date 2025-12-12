@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour
     public GameObject m_startButton;
     public Image m_enemyLife;
     public Image m_playerLife;
-
+    public GameObject gameOverScreen;
 
     void Start()
     {
@@ -37,13 +37,13 @@ public class UIController : MonoBehaviour
         m_enemyLife.gameObject.SetActive(isActive);
     }
 
-    public void EnemyLifeBar ( int amount, int maxLife)
+    public void EnemyLifeBar (int amount, int maxLife)
     {
-        m_enemyLife.fillAmount = amount / maxLife;
+        m_enemyLife.fillAmount = (float)amount / (float)maxLife;
     }
 
     public void PlayerLifeBar(int amount, int maxLife)
     {
-        m_playerLife.fillAmount = amount / maxLife;
+        m_playerLife.fillAmount = (float)amount / (float)maxLife;
     }
 }

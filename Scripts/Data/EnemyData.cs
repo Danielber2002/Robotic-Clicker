@@ -4,7 +4,7 @@ using UnityEngine;
 
 [System.Serializable]
 
-public class EnemyData : MonoBehaviour
+public class EnemyData
 {
    public string m_name;
     public int m_damage;
@@ -13,6 +13,7 @@ public class EnemyData : MonoBehaviour
     public int m_rewardExperience;
     public float m_timeBetweenAttacks;
     public int m_percentageStrongAttacks;
+    public int m_currentLife;
 
     public int m_currentlife;
 
