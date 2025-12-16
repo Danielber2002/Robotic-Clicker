@@ -6,7 +6,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     private PlayerController m_player;
-    private RoomsController m_roomController;
+    [SerializeField] private RoomsController m_roomController;
     public UIController m_uiController;
     private LabyrinthData m_labyrinth;
     public EnemyData m_enemyData;
@@ -16,12 +16,12 @@ public class GameManager : MonoBehaviour
     private GameObject m_gameOverScreen;
     private TextMeshProUGUI m_gameOverScreenText;
 
-    private SpriteSelector m_spriteSelector;
+    private RealGameObjectSelector m_GameObjectSelector;
 
 
     void Start()
     {
-       m_spriteSelector = GetComponent<SpriteSelector>();
+       m_GameObjectSelector = GetComponent<RealGameObjectSelector>();
        m_gameOverScreen = m_uiController.gameOverScreen;
        m_gameOverScreenText = m_uiController.gameOverScreen.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
@@ -33,18 +33,77 @@ public class GameManager : MonoBehaviour
         // CREMOS EL LABERINTO QUE CONTIENE LAS HABITACIONES
         m_labyrinth = new LabyrinthData();
 
+        int randomNum = Random.Range(15, 25);
+
         //AÑADE HABITACIONES AL LABERINTO
-        TrapData trap = new TrapData("Pinchos", -10);
-        RoomData room = new RoomData(trap);
-        m_labyrinth.AddRoom(room);
+        TrapData trap1 = new TrapData("Pinchos", -10);
+        TrapData trap2 = new TrapData("Aceite", -5);
+        ItemData item1 = new ItemData("Heal", 10, 0, 0);
+        ItemData item2 = new ItemData("Armor", 0, 0, 1);
+        ItemData item3 = new ItemData("Damage", 0, 1, 0);
+        EnemyData ExMichelin1 = new EnemyData("ExMichelin", 15, 3, 60, 20, 2, 30);
+        EnemyData ExMichelin2 = new EnemyData("ExMichelin", 15, 3, 60, 20, 2, 30);
+        EnemyData DuracellRobot1 = new EnemyData("DuracellRobot", 15, 3, 60, 20, 2, 30);
+        EnemyData DuracellRobot2 = new EnemyData("DuracellRobot", 15, 3, 60, 20, 2, 30);
+        EnemyData AssasinConga1 = new EnemyData("AssasinConga", 15, 3, 60, 20, 2, 30);
+        EnemyData AssasinConga2 = new EnemyData("AssasinConga", 15, 3, 60, 20, 2, 30);
+        RoomData room;
 
-        ItemData item = new ItemData("Item 1", 10, 0, 0);
-        room = new RoomData(item);
-        m_labyrinth.AddRoom(room);
+        for (int i = 0; i < randomNum; i++)
+        {
+            int randomRoom = Random.Range(0, 11);
+            switch (randomRoom)
+            {
+                case 0:
+                    room = new RoomData(trap1);
+                    m_labyrinth.AddRoom(room);
+                    break;
+                case 1:
+                    room = new RoomData(trap2);
+                    m_labyrinth.AddRoom(room);
+                    break;
+                case 2:
+                    room = new RoomData(item1);
+                    m_labyrinth.AddRoom(room);
+                    break;
+                case 3:
+                    room = new RoomData(item2);
+                    m_labyrinth.AddRoom(room);
+                    break;
+                case 4:
+                    room = new RoomData(item3);
+                    m_labyrinth.AddRoom(room);
+                    break;
+                case 5:
+                    room = new RoomData(ExMichelin1, 2);
+                    m_labyrinth.AddRoom(room);
+                    break;
+                case 6:
+                    room = new RoomData(ExMichelin2, 3);
+                    m_labyrinth.AddRoom(room);
+                    break;
+                case 7:
+                    room = new RoomData(DuracellRobot1, 0);
+                    m_labyrinth.AddRoom(room);
+                    break;
+                case 8:
+                    room = new RoomData(DuracellRobot2, 1);
+                    m_labyrinth.AddRoom(room);
+                    break;
+                case 9:
+                    room = new RoomData(AssasinConga1, 4);
+                    m_labyrinth.AddRoom(room);
+                    break;
+                case 10:
+                    room = new RoomData(AssasinConga2, 5);
+                    m_labyrinth.AddRoom(room);
+                    break;
 
-        EnemyData enemy = new EnemyData("Enemy 1", 15, 3, 60, 20, 2,30);
-        room = new RoomData(enemy);
-        m_labyrinth.AddRoom(room);
+                default:
+                    break;
+            }
+        }
+
 
         m_player = new PlayerController(10, 2, 100);
 
@@ -87,15 +146,15 @@ public class GameManager : MonoBehaviour
         {
             case RoomData.RoomType.ENEMY:
                 m_uiController.EnableEnemyBar(true);
-                m_roomController.SetRoom(m_labyrinth.GetCurrentRoom().m_enemy, m_spriteSelector.GetEnemySpriteByName(m_labyrinth.GetCurrentRoom().m_enemy.m_name));
+                m_roomController.SetRoom(m_labyrinth.GetCurrentRoom().m_enemy, m_GameObjectSelector.GetEnemyGameObjectByName(m_labyrinth.GetCurrentRoom().m_enemy.m_name), m_labyrinth.GetCurrentRoom().m_index);
                 break;
             case RoomData.RoomType.ITEM:
                 m_uiController.EnableEnemyBar(false);
-                m_roomController.SetRoom(m_labyrinth.GetCurrentRoom().m_item, m_spriteSelector.GetItemSpriteByName(m_labyrinth.GetCurrentRoom().m_item.m_name));
+                m_roomController.SetRoom(m_labyrinth.GetCurrentRoom().m_item, m_GameObjectSelector.GetItemGameObjectByName(m_labyrinth.GetCurrentRoom().m_item.m_name));
                 break;
             case RoomData.RoomType.TRAP:
                 m_uiController.EnableEnemyBar(false);
-                m_roomController.SetRoom(m_labyrinth.GetCurrentRoom().m_trap, m_spriteSelector.GetTrapSpriteByName(m_labyrinth.GetCurrentRoom().m_trap.m_name));
+                m_roomController.SetRoom(m_labyrinth.GetCurrentRoom().m_trap, m_GameObjectSelector.GetTrapGameObjectByName(m_labyrinth.GetCurrentRoom().m_trap.m_name));
                 break;
             default:
                 break;
@@ -138,7 +197,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
+    
     public void EnemyAttack(int damage)
     {
         m_player.ReceiveDamage(damage);

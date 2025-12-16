@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapData : MonoBehaviour
+public class TrapData 
 {
     public string m_name;
     public int m_playerDamage;

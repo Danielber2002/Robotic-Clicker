@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LabyrinthData : MonoBehaviour
+public class LabyrinthData
 {
     List<RoomData> m_labyrinth;
     int m_currentIndexRoom;

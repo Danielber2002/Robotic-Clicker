@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomData : MonoBehaviour
+public class RoomData 
 {
     public enum RoomType { ENEMY, ITEM, TRAP};
 
@@ -10,7 +10,8 @@ public class RoomData : MonoBehaviour
     public TrapData m_trap;
     public EnemyData m_enemy;
     public ItemData m_item;
-   
+    public int m_index;
+
     public RoomData (TrapData trap)
     {
         m_roomType = RoomType.TRAP;
@@ -18,11 +19,13 @@ public class RoomData : MonoBehaviour
     
     }
 
-    public RoomData (EnemyData enemy)
+    public RoomData (EnemyData enemy,int index)
     {
         m_roomType = RoomType.ENEMY;
         m_enemy = enemy;
+        m_index = index;
     }
+
 
     public RoomData (ItemData item)
     {
